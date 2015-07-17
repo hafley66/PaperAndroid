@@ -25,28 +25,20 @@ public abstract class ActionMatrix {
     protected Matrix affine = new Matrix();
     public Listener listener;
 
-    public abstract
-    void onNullPivot(MatrixPoint point);
+    public abstract void onNullPivot(MatrixPoint point);
 
-    public
-    ActionMatrix(Listener listener)
+    public ActionMatrix(Listener listener)
     {
         this.listener = listener;
     }
-    public
-    ActionMatrix()
-    {this(null);}
+    public ActionMatrix() {this(null);}
 
-    public
-    MatrixPoint
+    public MatrixPoint
             scale = new MatrixPoint(1, 1, PRE),
             rotation = new MatrixPoint(0, 0, SET),
             translate = new MatrixPoint(0, 0, POST);
 
-    public
-    class
-    MatrixPoint extends FacadePoint
-    {
+    public class MatrixPoint extends FacadePoint {
         protected FacadePoint pivot = new FacadePoint(0,0);
         protected Point oldPoint = new Point(0,0);
         public Point applyPoint;
@@ -175,10 +167,7 @@ public abstract class ActionMatrix {
         return this;
     }
 
-    public
-    interface
-            Listener
-    {
+    public interface Listener {
         public void onMatrixPointChange(MatrixPoint changed, Point old);
 //        public void onMatrixPointApplyRequest(MatrixPoint changed, Point toApply);
     }

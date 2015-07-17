@@ -210,6 +210,7 @@ public class Index<T> implements Iterable<T>{
         one.remove(10f);
         System.out.println(list.toString());
     }
+
     public String toString(){
         iterator();
         StringBuilder sb = new StringBuilder(name + " : {");

@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 /**
  * Created by chrishafley on 4/14/15.
+ * Extension of the BitSet class in Java.util package.
+ * Keeps track of the "size" of the bitset, or rather how many bits are turned on.
  */
 public class NBitSet extends BitSet {
     protected BitIndexIterator i_iter = new BitIndexIterator(this);
@@ -75,6 +77,7 @@ public class NBitSet extends BitSet {
     public BitSet shiftKillLeft(int left){
         return shiftKillLeft(left, this.length());
     }
+
     private BitSet shift_kill_bit(int dir, int left, int right){
         if(left < right){
             int offset = 0;

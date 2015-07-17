@@ -11,13 +11,11 @@ public class Group extends LinkedMatrix implements Entity.Listener{
     public Index<Entity> index;
     public Index<Group> subLists;
 
-    public Group
-            (){
+    public Group(){
         this(PaperAndroid.activePanel());
     }
     //Meant for private construction inside of the panel class.
-    Group
-    (Layer panel){
+    Group (Layer panel){
         panel.add(this);
     }
 
@@ -67,9 +65,7 @@ public class Group extends LinkedMatrix implements Entity.Listener{
     }
 
     @Override
-    public
-    void
-    setDirtyCascade() {
+    public void setDirtyCascade() {
         this._actualSetDirty();
         for(Entity child : index){
             child.setDirtyCascade();
@@ -77,16 +73,12 @@ public class Group extends LinkedMatrix implements Entity.Listener{
     }
 
     @Override
-    public
-    void
-    onPSTFChange(Entity self, int code) {
+    public void onPSTFChange(Entity self, int code) {
         //Do group caching logic here.
         this.setDirtyCascade();
     }
 
-    public
-    void
-    addGroup(Group list){
+    public void addGroup(Group list){
 
     }
 }

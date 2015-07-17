@@ -33,9 +33,7 @@ public class Viewport {
         tic();
     }
 
-    public
-    void
-    addLayer(Layer l){
+    public void addLayer(Layer l){
         if(!layers.contains(l))
             layers.add(l);
     }
@@ -49,18 +47,13 @@ public class Viewport {
         return System.currentTimeMillis() - lastStart;
     }
 
-    public
-    interface
-    Layer
-    {
+    public interface Layer {
         public void draw(Canvas canvas,
                          CanvasPaints paints);
     }
 
 
-    public
-    void
-    draw(Canvas canvas){
+    public void draw(Canvas canvas){
         if(toc() > 1/fps){
             resetCanvas();
             for(Layer l : layers){
@@ -74,6 +67,4 @@ public class Viewport {
     private void resetCanvas() {
         this.canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
     }
-
-
 }

@@ -9,8 +9,7 @@ import FinalCode.points.Point;
  * Created by chrishafley on 4/12/15.
  */
 public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.Listener, Bounds.Handler{
-    private static int
-            IDS = 0;
+    private static int IDS = 0;
 
     LinkedMatrix outer;
     LinkedMatrix inner;
@@ -23,13 +22,9 @@ public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.
 
     public int id = IDS++;
 
-    public abstract
-    void
-    computeBounds(Bounds f);
+    public abstract void computeBounds(Bounds f);
 
-    public final
-    Bounds localBounds = new Bounds(this)
-    {
+    public final Bounds localBounds = new Bounds(this){
         protected
         void
         computeBounds() {
@@ -44,9 +39,7 @@ public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.
         }
     };
 
-    public final
-    Bounds globalBounds = new Bounds(this)
-    {
+    public final Bounds globalBounds = new Bounds(this){
         protected
         void
         computeBounds() {
@@ -55,32 +48,25 @@ public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.
         }
     };
 
-    public final
-    Bounds.BoundPoint
+    public final Bounds.BoundPoint
             localPosition = localBounds.center(),
             globalPosition = globalBounds.center();
 
     public Bounds bounds = localBounds;
     public Bounds.BoundPoint position = localPosition;
 
-    public
-    void
-    onNullPivot(MatrixPoint point) {
+    public void onNullPivot(MatrixPoint point) {
         point.pivot.St(localBounds.center());
     }
 
-    protected
-    void
-    _onMatrixPointChange_internal(MatrixPoint changed, Point old) {
+    protected void _onMatrixPointChange_internal(MatrixPoint changed, Point old) {
         super._onMatrixPointChange_internal(changed, old);
         setDirtyCascade();
         if (immediateCascade)
             cascadeMatrices();
     }
 
-    public
-    void
-    setDirtyCascade() {
+    public void setDirtyCascade() {
         if (!this.dirtyCascade) {
             LinkedMatrix curr = this;
             while (curr != null) {
@@ -90,14 +76,11 @@ public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.
         }
     }
 
-    protected
-    void
-    _actualSetDirty(){
+    protected void _actualSetDirty(){
         dirtyCascade = true;
     }
 
-    public LinkedMatrix
-    getBeginningMatrix() {
+    public LinkedMatrix getBeginningMatrix() {
         LinkedMatrix curr = this;
         while (curr.getOuter() != null) {
             curr = curr.getOuter();
@@ -105,17 +88,13 @@ public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.
         return curr;
     }
 
-    public
-    Matrix
-    getCascade() {
+    public Matrix getCascade() {
         if (dirtyCascade)
             cascadeMatrices();
         return cascade;
     }
 
-    public
-    void
-    cascadeMatrices() {
+    public void cascadeMatrices() {
         LinkedMatrix dirtiest = getBeginningMatrix();
         while (dirtiest.inner != null && !dirtiest.dirtyCascade)
             dirtiest = dirtiest.inner;
@@ -132,27 +111,21 @@ public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.
         }
     }
 
-    public LinkedMatrix
-    getOuter(){
+    public LinkedMatrix getOuter(){
         if(this.outer != null)
             this.outer.inner = this;
         return this.outer;
     }
 
-    public LinkedMatrix
-    getInner() {
+    public LinkedMatrix getInner() {
         return this.inner;
     }
 
-    public
-    void
-    setParent(LinkedMatrix parent){
+    public void setParent(LinkedMatrix parent){
         this.outer = parent;
     }
 
-    public
-    boolean
-    isVisible(){
+    public boolean isVisible(){
         LinkedMatrix top = getBeginningMatrix();
         while(top != null){
            if(!top.visible)
@@ -162,19 +135,14 @@ public abstract class LinkedMatrix extends ActionMatrix implements ActionMatrix.
         return true;
     }
 
-    public
-    void
-    clean(){
+    public void clean(){
         dirtyCascade = false;
     }
 
-    public static
-    void
-    main(String args[]){
+    public static void main(String args[]){
         Entity one = new Entity();
         Group two = new Group();
         two.add(one);
         Layer p = PaperAndroid.activePanel();
     }
-
 }

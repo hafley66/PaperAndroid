@@ -11,26 +11,20 @@ import FinalCode.IndexList.IndexedList;
  */
 public class Layer implements Viewport.Layer{
 
-    public
-    ArrayList<Group> groups = new ArrayList<>();
+    public ArrayList<Group> groups = new ArrayList<>();
 
-    final
-    Group root;
+    final Group root;
 
-    protected
-    IndexedList<Entity> L = new IndexedList<>();
-    IndexedList<Group> G = new IndexedList<>();
+    protected IndexedList<Entity> L = new IndexedList<>();
+    protected IndexedList<Group> G = new IndexedList<>();
 
-    public Layer()
-    {
+    public Layer() {
         PaperAndroid.activePanel = this;
         root = new Group(this);
         PaperAndroid.activeViewport.addLayer(this);
     }
 
-    public
-    void
-    draw(Canvas canvas, CanvasPaints paints){
+    public void draw(Canvas canvas, CanvasPaints paints){
         canvas.save();
         for(Entity drawable : L){
             canvas.save();

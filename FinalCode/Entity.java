@@ -36,9 +36,7 @@ public class Entity extends LinkedMatrix implements PATH.Listener, Style.StyleLi
             marm.add(this);
     }
 
-    public
-    void
-    draw(Canvas canvas,
+    public void draw(Canvas canvas,
                      CanvasPaints paints) {
         //Assume canvas has identity matrix on its matrix stack.
         canvas.setMatrix(
@@ -51,15 +49,11 @@ public class Entity extends LinkedMatrix implements PATH.Listener, Style.StyleLi
         paints.reset();
     }
 
-    public
-    void
-    computeBounds(Bounds rect) {
+    public void computeBounds(Bounds rect) {
         path.path.computeBounds(rect, true);
     }
 
-    public
-    void
-    onBoundsPointMoveRequest(
+    public void onBoundsPointMoveRequest(
             Bounds.BoundPoint bndPt,
             Point requestedPoint) {
         //get difference
@@ -69,52 +63,36 @@ public class Entity extends LinkedMatrix implements PATH.Listener, Style.StyleLi
         onChange(BOUNDS_CHANGE);
     }
 
-    public
-    void
-    onMatrixPointChange(
+    public void onMatrixPointChange(
             MatrixPoint changed,
             Point old){
         onChange(MATRIX_CHANGE);
     }
 
     @Override
-    public
-    void
-    onCreatePathPoint(PATH.PathPoint
-                              createdPoint){
+    public void onCreatePathPoint(PATH.PathPoint createdPoint){
         dirtyPath = true;
         onChange(PATH_CHANGE);
     }
 
     @Override
-    public
-    void
-    onColorPointChange(Style.ColorPoint
-                               changed){
+    public void onColorPointChange(Style.ColorPoint changed){
         onChange(STYLE_CHANGE);
     }
 
     @Override
-    public
-    void
-    onStrokePointChange(Style.StrokePoint
-                                changed){
+    public void onStrokePointChange(Style.StrokePoint changed){
         onChange(STYLE_CHANGE);
     }
 
-    protected
-    void
-    onChange(int code){
+    protected void onChange(int code){
         if(listener != null)
             listener.onPSTFChange(this, code);
     }
 
     Listener listener = null;
 
-    public
-    interface
-            Listener
-    {
+    public interface Listener {
         public
         void
         onPSTFChange(Entity self, int code);
@@ -122,9 +100,7 @@ public class Entity extends LinkedMatrix implements PATH.Listener, Style.StyleLi
 
 
     @Override
-    public
-    void
-    _actualSetDirty() {
+    public void _actualSetDirty() {
         super._actualSetDirty();
     }
 }
